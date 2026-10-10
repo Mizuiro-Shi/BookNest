@@ -13,14 +13,22 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * The primary key for the model.
+     */
+    protected $primaryKey = 'UserID';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'Username',
+        'Password',
+        'Email',
+        'NamaLengkap',
+        'Alamat',
+        'Role',
     ];
 
     /**
@@ -29,7 +37,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'Password',
         'remember_token',
     ];
 
@@ -40,6 +48,45 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'Password' => 'hashed',
     ];
+
+    /**
+     * Override the auth identifier column (default: 'email').
+     */
+    public function getAuthIdentifierName(): string
+    {
+        return 'Email';
+    }
+
+    /**
+     * Override the auth password column (default: 'password').
+     */
+    public function getAuthPassword(): string
+    {
+        return $this->Password;
+    }
+
+    /**
+     * Check if user has a specific role.
+     */
+    public function hasRole(string $role): bool
+    {
+        return $this->Role === $role;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
+    }
+
+    public function isPetugas(): bool
+    {
+        return $this->hasRole('petugas');
+    }
+
+    public function isUser(): bool
+    {
+        return $this->hasRole('user');
+    }
 }
