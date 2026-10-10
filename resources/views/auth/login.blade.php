@@ -189,7 +189,7 @@
         <p class="subtitle">Kelola peminjaman dan akses koleksi pustaka mandiri</p>
 
         <!-- Form -->
-        <form action="{{ route('login.post') }}" method="POST">
+        <form action="{{ route('login.post') }}" method="POST" id="loginForm">
             @csrf
 
             {{-- Error alert --}}
@@ -235,8 +235,8 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary d-flex justify-content-center align-items-center">
-                Masuk Sekarang <i class="ti ti-arrow-right btn-icon"></i>
+            <button type="submit" id="submitBtn" class="btn btn-primary d-flex justify-content-center align-items-center">
+                Masuk Sekarang
             </button>
         </form>
 
@@ -264,6 +264,13 @@
                 toggleIcon.classList.add('ti-eye');
             }
         }
+
+        // Add loader to submit button
+        document.getElementById('loginForm').addEventListener('submit', function() {
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Memproses...';
+        });
     </script>
 </body>
 </html>

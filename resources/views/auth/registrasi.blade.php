@@ -179,7 +179,7 @@
         <p class="subtitle">Lengkapi data di bawah untuk membuat akun keanggotaan<br>perpustakaan.</p>
 
         <!-- Form -->
-        <form action="{{ route('register.post') }}" method="POST">
+        <form action="{{ route('register.post') }}" method="POST" id="registerForm">
             @csrf
 
             {{-- Error alert --}}
@@ -253,7 +253,7 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" id="submitBtn" class="btn btn-primary d-flex justify-content-center align-items-center">
                 Daftar Akun
             </button>
         </form>
@@ -282,6 +282,13 @@
                 toggleIcon.classList.add('ti-eye');
             }
         }
+
+        // Add loader to submit button
+        document.getElementById('registerForm').addEventListener('submit', function() {
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Memproses...';
+        });
     </script>
 </body>
 </html>
