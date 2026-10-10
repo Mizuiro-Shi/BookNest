@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('Ulasan');
             $table->integer('Rating');
 
-            $table->foreign('BukuID')->references('BukukID')->on('buku')->onDelete('cascade');
+            $table->foreign('BukuID')->references('BukuID')->on('buku')->onDelete('cascade');
             $table->foreign('UserID')->references('UserID')->on('users')->onDelete('cascade');
 
             $table->timestamps();

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('Email')->unique();
             $table->string('NamaLengkap');
             $table->text('Alamat');
+            $table->enum('Role', ['admin', 'petugas', 'user'])->default('user');
             $table->timestamps();
         });
     }

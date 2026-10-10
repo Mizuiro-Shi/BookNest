@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('TanggalPengembalian')->nullable();
             $table->string('StatusPeminjaman', 50);
 
-            $table->foreign('BukuID')->references('BukukID')->on('buku')->onDelete('cascade');
+            $table->foreign('BukuID')->references('BukuID')->on('buku')->onDelete('cascade');
             $table->foreign('KategoriID')->references('KategoriID')->on('kategoribuku')->onDelete('cascade');
 
             $table->timestamps();
